@@ -1,0 +1,6 @@
+---
+- name: Run the prechecks and postchecks comparision task.
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - rol-capg-prepostchecks

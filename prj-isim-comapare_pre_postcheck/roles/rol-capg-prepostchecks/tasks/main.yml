@@ -1,0 +1,30 @@
+---
+# tasks file for rol-capg-prepostchecks
+- name: Create output.csv with headers
+  copy:
+    dest: "{{ output_path }}"
+    content: "Vserver State,Vserver State Timestamp,Vserver Name\n"
+    force: true
+    
+- name: Read pre_checks.csv
+  read_csv:
+    path: "{{ prechecks_path }}"
+    key: Vserver Name
+  register: pre_checks
+
+- name: Read post_checks.csv
+  read_csv:
+    path: "{{ postchecks_path }}"
+    key: Vserver Name
+  register: post_checks
+
+- name: Compare and write differences to output.csv
+  lineinfile:
+    path: "{{ output_path }}"
+    create: yes
+    line: "{{ post_checks.dict[item]['Vserver State'] }},{{ post_checks.dict[item]['Vserver State Timestamp'] }},{{ item }}"
+    state: present
+  loop: "{{ post_checks.dict.keys() }}"
+  when: >-
+    (item not in pre_checks.dict) or
+    (pre_checks.dict[item]['Vserver State'] != post_checks.dict[item]['Vserver State'])

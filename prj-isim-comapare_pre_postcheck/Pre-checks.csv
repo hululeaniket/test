@@ -1,0 +1,77 @@
+Vserver Type,Partition Name,Vserver State,Vserver State Timestamp,Vserver IP Address,Vserver Name,Hostname,Display Name,Vserver Health,App Security,Vserver Effective State,Vserver Port
+SSL,,Up,"47 days, 04h : 02m : 14s",10.82.134.16,engab91n-vip-ssl-443,nhqnscab5a,10.86.90.101-10.86.90.102,67,None,UP,443
+SSL,,Down,"5 days, 01h : 40m : 14s",10.82.134.24,myaccess-snow-task-qan-vip-ssl-18443,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,18443
+TCP,,Out of Service,"3 days, 06h : 41m : 17s",10.82.134.6,auto-infogix_assure-eng_01-vip-TCP-7520,nhqnscab5a,10.86.90.101-10.86.90.102,50,None,DOWN,7520
+SSL,,Up,"145 days, 02h : 58m : 51s",10.82.134.5,auto-jbwebteam-eng_blue-vip-SSL-443,nhqnscab5a,10.86.90.101-10.86.90.102,100,None,UP,443
+HTTP,,Down,"145 days, 03h : 09m : 55s",10.82.134.130,old-devaa99n-http-vip,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,80
+SSL,,Down,"145 days, 03h : 09m : 55s",10.82.134.21,auto-cbsbillaccountrestservice-eng-vip-SSL-443,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,443
+HTTP,,Up,"145 days, 02h : 58m : 51s",10.82.134.5,auto-jbwebteam-eng_blue-vip-HTTP-80,nhqnscab5a,10.86.90.101-10.86.90.102,100,None,UP,80
+SSL,,Down,"148 days, 06h : 22m : 07s",0.0.0.0,test1,nhqnscab6b,10.86.90.111-10.86.90.112,0,None,DOWN,0
+SSL,,Down,"145 days, 03h : 09m : 55s",10.82.134.253,tstag74n-vip-ssl-443,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,443
+SSL,,Down,"145 days, 03h : 09m : 55s",10.82.134.4,auto-oem-eng-vip-SSL-5443,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,5443
+HTTP,,Up,"145 days, 02h : 58m : 51s",10.82.134.14,auto-tpswebteam-eng-green-vip-HTTP-80,nhqnscab5a,10.86.90.101-10.86.90.102,100,None,UP,80
+SSL_BRIDGE,,Down,"145 days, 03h : 09m : 55s",192.168.1.1,TEST,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,443
+SSL,,Down,"145 days, 03h : 09m : 55s",10.82.134.6,auto-infogix_assure-eng_01-vip-SSL-443,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,443
+SSL,,Out of Service,"44 days, 11h : 22m : 29s",10.82.134.14,auto-tpswebteam-eng-green-vip-SSL-443,nhqnscab5a,10.86.90.101-10.86.90.102,100,None,DOWN,443
+SSL,,Down,"145 days, 03h : 09m : 55s",10.82.134.19,testcookie,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,443
+TCP,,Up,"145 days, 02h : 58m : 51s",10.82.134.13,auto-infogix_assure-eng-vip-TCP-7520,nhqnscab5a,10.86.90.101-10.86.90.102,100,None,UP,7520
+SSL,,Down,"145 days, 03h : 09m : 55s",10.82.134.12,auto-images-eng-vip-SSL-443,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,443
+SSL,,Down,"145 days, 03h : 09m : 55s",0.0.0.0,abcsss,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,0
+HTTP,,Down,"145 days, 03h : 09m : 55s",10.82.134.88,ccna,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,80
+SSL,,Up,"110 days, 04h : 55m : 56s",10.82.134.17,engab91npsv-vip-ssl-443,nhqnscab5a,10.86.90.101-10.86.90.102,67,None,UP,443
+SSL,,Down,"145 days, 03h : 09m : 55s",10.82.134.13,auto-infogix_assure-eng-vip-SSL-443,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,443
+HTTP,,Down,"145 days, 03h : 09m : 55s",10.82.134.251,pasta-vip-http-80,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,80
+TCP,,Up,"69 days, 01h : 12m : 04s",10.82.134.16,engab91n-vip-tcp-4447,nhqnscab5a,10.86.90.101-10.86.90.102,67,None,UP,4447
+SSL_TCP,,Up,"7 days, 15h : 00m : 45s",10.247.216.48,syslog-tls-6514-vip,nhqnscab5a,10.86.90.101-10.86.90.102,100,None,UP,6514
+HTTP,,Down,"145 days, 03h : 09m : 55s",10.82.134.6,auto-infogix_assure-eng_01-vip-HTTP-80,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,80
+SSL,,Down,"145 days, 03h : 09m : 55s",10.82.134.4,auto-oem-eng-vip-SSL-4903,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,4903
+HTTP,,Down,"108 days, 17h : 59m : 59s",10.82.134.40,VIP-1,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,80
+SSL,,Down,"108 days, 17h : 59m : 58s",10.82.134.18,test-windy-adm-443,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,443
+SSL,,Down,"145 days, 03h : 09m : 55s",10.88.96.143,auto-encore2-dev-green-vip-SSL-443,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,443
+HTTP,,Down,"108 days, 18h : 02m : 45s",10.82.138.20,VIP-2,nhqnscab6b,10.86.90.111-10.86.90.112,0,None,DOWN,80
+HTTP,,Out of Service,"117 days, 04h : 32m : 45s",10.82.134.247,blue_vserver,nhqnscab5a,10.86.90.101-10.86.90.102,100,None,DOWN,80
+SSL_BRIDGE,,Out of Service,"44 days, 11h : 22m : 41s",10.82.134.20,Anytest-sslb-vip,nhqnscab5a,10.86.90.101-10.86.90.102,100,None,DOWN,10550
+SSL,,Down,"148 days, 06h : 22m : 07s",10.82.138.12,test,nhqnscab6b,10.86.90.111-10.86.90.112,0,None,DOWN,443
+HTTP,,Down,"145 days, 03h : 09m : 55s",0.0.0.0,abc,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,0
+HTTP,,Down,"145 days, 03h : 09m : 55s",10.82.134.253,tstag74n-vip-http-80,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,80
+SSL,,Down,"145 days, 03h : 09m : 55s",10.88.96.145,auto-encore2-dev-blue-vip-SSL-443,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,443
+HTTP,,Up,"110 days, 04h : 55m : 56s",10.82.134.16,engab91n-vip-http-80,nhqnscab5a,10.86.90.101-10.86.90.102,67,None,UP,80
+HTTP,,Down,"145 days, 03h : 09m : 55s",10.82.134.12,auto-images-eng-vip-HTTP-80,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,80
+HTTP,,Up,06h : 09m : 30s,10.82.134.252,intaa63n-vip-http-80,nhqnscab5a,10.86.90.101-10.86.90.102,100,None,UP,80
+HTTP,,Up,"69 days, 01h : 12m : 19s",10.82.134.17,engab91npsv-vip-http-80,nhqnscab5a,10.86.90.101-10.86.90.102,67,None,UP,80
+SSL,,Down,"145 days, 03h : 09m : 55s",10.247.216.48,test syslog,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,443
+HTTP,,Down,"145 days, 03h : 09m : 55s",10.82.134.249,pizza-vip-HTTP-80,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,80
+SSL_BRIDGE,,Out of Service,"3 days, 06h : 41m : 40s",10.82.134.20,Anytest-ssl-vip,nhqnscab5a,10.86.90.101-10.86.90.102,100,None,DOWN,443
+TCP,,Down,"145 days, 03h : 09m : 55s",10.82.134.30,exchange_test_25,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,25
+SSL,,Down,"145 days, 03h : 09m : 55s",10.82.134.8,auto-claimctrgwsolr-eng-vip-SSL-443,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,443
+HTTP,,Down,"145 days, 03h : 09m : 55s",10.82.134.254,testbilling-vip-http-80,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,80
+UDP,,Down,"145 days, 03h : 09m : 55s",0.0.0.0,sessionless,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,0
+HTTP,,Down,"145 days, 03h : 09m : 55s",10.82.134.4,auto-oem-eng-vip-HTTP-4889,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,4889
+SSL,,Down,"145 days, 03h : 09m : 55s",192.168.1.30,abhijit,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,443
+TCP,,Up,"47 days, 04h : 02m : 13s",10.82.134.17,engab91npsv-vip-tcp-4447,nhqnscab5a,10.86.90.101-10.86.90.102,67,None,UP,4447
+HTTP,,Down,"108 days, 17h : 55m : 33s",10.82.134.248,green_vserver,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,80
+SSL,,Up,"31 days, 00h : 53m : 11s",10.82.134.7,auto-tpswebteam-eng-blue-vip-SSL-443,nhqnscab5a,10.86.90.101-10.86.90.102,100,None,UP,443
+HTTP,,Out of Service,"3 days, 06h : 41m : 06s",10.82.134.8,auto-claimctrgwsolr-eng-vip-HTTP-80,nhqnscab5a,10.86.90.101-10.86.90.102,50,None,DOWN,80
+HTTP,,Down,"145 days, 03h : 09m : 55s",10.82.134.2,auto-infoblox_test-eng-blue-vip-HTTP-80,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,80
+SSL,,Down,"145 days, 03h : 09m : 55s",10.82.134.251,pasta-vip-ssl-443,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,443
+HTTP,,Down,"145 days, 03h : 09m : 55s",10.82.134.15,auto-cfrbillaccountrestservice-eng-vip-HTTP-80,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,80
+SSL,,Down,"145 days, 03h : 09m : 55s",10.82.134.4,auto-oem-eng-vip-SSL-443,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,443
+HTTP,,Out of Service,"3 days, 06h : 41m : 29s",10.86.90.150,test-session-http-vip,nhqnscab5a,10.86.90.101-10.86.90.102,50,None,DOWN,80
+HTTP,,Up,"79 days, 02h : 31m : 59s",10.82.134.1,auto-jbwebteam-eng_green-vip-HTTP-80,nhqnscab5a,10.86.90.101-10.86.90.102,100,None,UP,80
+SSL,,Down,"145 days, 03h : 09m : 55s",10.82.134.249,pizza-vip-ssl-443,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,443
+TCP,,Down,"145 days, 03h : 09m : 55s",0.0.0.0,abchffh,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,0
+ANY,,Out of Service,"44 days, 11h : 22m : 53s",10.82.134.20,Anytest-vip,nhqnscab5a,10.86.90.101-10.86.90.102,100,None,DOWN,65535
+SSL,,Down,"145 days, 03h : 09m : 55s",10.82.134.2,auto-infoblox_test-eng-blue-vip-SSL-443,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,443
+TCP,,Down,"145 days, 03h : 09m : 55s",10.82.134.150,vds-cab,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,636
+SSL,,Down,"145 days, 03h : 09m : 55s",10.82.134.23,auto-clpc-eng-vip-SSL-443,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,443
+HTTP,,Up,"145 days, 02h : 58m : 51s",10.82.134.7,auto-tpswebteam-eng-blue-vip-HTTP-80,nhqnscab5a,10.86.90.101-10.86.90.102,100,None,UP,80
+SSL,,Down,"108 days, 17h : 59m : 59s",0.0.0.0,pwsam-default-vip,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,0
+SSL,,Up,"145 days, 02h : 58m : 51s",10.82.134.1,auto-jbwebteam-eng_green-vip-SSL-443,nhqnscab5a,10.86.90.101-10.86.90.102,100,None,UP,443
+HTTP,,Up,"2 days, 16h : 46m : 17s",10.82.134.18,TEST_windy_ADM,nhqnscab5a,10.86.90.101-10.86.90.102,50,None,UP,80
+HTTP,,Down,"108 days, 17h : 58m : 10s",10.82.138.11,dr_vserver,nhqnscab6b,10.86.90.111-10.86.90.112,0,None,DOWN,80
+HTTP,,Down,"145 days, 03h : 09m : 55s",10.82.134.13,auto-infogix_assure-eng-vip-HTTP-80,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,80
+SSL,,Down,"108 days, 17h : 59m : 59s",0.0.0.0,pwsam-client-auth-vip,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,0
+HTTP,,Out of Service,"44 days, 11h : 22m : 18s",10.82.134.22,auto-encore-eng_01-vip-HTTP-80,nhqnscab5a,10.86.90.101-10.86.90.102,100,None,DOWN,80
+SSL,,Down,"145 days, 03h : 09m : 55s",10.82.134.15,auto-cfrbillaccountrestservice-eng-vip-SSL-443,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,443
+SSL,,Down,"116 days, 04h : 16m : 59s",10.82.134.254,testbilling-vip-ssl-443,nhqnscab5a,10.86.90.101-10.86.90.102,0,None,DOWN,443
+SSL,,Out of Service,"44 days, 11h : 22m : 06s",10.82.134.22,auto-encore-eng_01-vip-SSL-443,nhqnscab5a,10.86.90.101-10.86.90.102,100,None,DOWN,443
