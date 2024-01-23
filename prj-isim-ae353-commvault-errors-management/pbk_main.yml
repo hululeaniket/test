@@ -1,0 +1,60 @@
+---
+# pbk_main.yml : root playbook of this usecase
+
+# main playbook 
+- name: "--- MAIN ---"
+  hosts: localhost
+  gather_facts: yes
+  vars_files:
+    - vars/var_main.yml
+  tasks:
+
+    # - name: init var formulaire
+    #   set_fact:
+    #     vCommvaultFile: "test1.xls"
+    #     vSipsirFile: ""
+    #     vFoFileReason: ""
+    #     mailstd_smtpTo: jean-baptiste-externe.meriaux@edf.fr
+
+    - name: Launch COMMVAULT process
+      include_tasks: "tasks/globalProcess.yml"
+      vars:
+        vTargetFile: "{{ vCommvaultFile }}"
+        vErrorsType: "NETWORKER"
+        vTeam: "ITO_ISIM2_EXPL-N1"
+      when: vCommvaultFile !=""
+
+    - name: Launch SIPSIR process
+      include_tasks: "tasks/globalProcess.yml"
+      vars:
+        vTargetFile: "{{ vSipsirFile }}"
+        vErrorsType: "SIPSIR"
+        vTeam: "ITO_ISIM2_SUPERVISION"
+      when: vSipsirFile !=""
+
+    - name: vMailBody if nothing to do
+      set_fact:
+        vMailBody: "Pas de fichier today {{ vFoFileReason }}"
+      when: vSipsirFile == "" and vCommvaultFile == ""
+
+    #need to send mail
+    # - name: debug
+    #   debug:
+    #     msg: "{{ vMailBody }}{{mailstd_smtpTo}}"
+
+#send exec result file to nexus
+    - name: Create log file for centreon
+      copy:
+        dest: "/outillage/oi2centagent/log/commvault_tickets.log"
+        content: "{{ vFileContent }}"
+      become: yes
+      become_method: sudo
+
+    - name: Send Final mail
+      include_role: 
+        name: rol-capg-mailstd
+      vars:
+        mailstd_type: INFO
+        mailstd_smtpSubject: "[AE353] Agent Commvault/ISM Execution Result"
+        mailstd_smtpBody: "{{ vMailBody }}"
+

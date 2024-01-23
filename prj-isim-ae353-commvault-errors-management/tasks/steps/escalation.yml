@@ -1,0 +1,37 @@
+#get la date de creation de l'incident
+
+#check si la date est anterieur à 14 jours
+
+# send mail si c'est le cas à vEscalationMailAdress
+
+- name: set vescalade
+  set_fact:
+    vescalade: ""
+
+- name: set vNowDate
+  set_fact:
+    vNowDate: "{{ ansible_date_time.date }} {{ ansible_date_time.time }}"
+
+- name: Convert vNowDate and vStartDate
+  set_fact:
+    vNowDate: "{{ ((vNowDate | to_datetime).strftime('%s')) }}"
+    vStartDate: "{{ ((vStartDate | to_datetime).strftime('%s'))  }}"
+
+- name: set vdiff
+  set_fact:
+    vdiff: "{{ (vNowDate | int ) - ( vStartDate | int) }}"
+
+# 1202400s = 14j - 2h de décalage horraire
+# - name: Send Final mail
+#   include_role: 
+#     name: rol-capg-mailstd
+#   vars:
+#     mailstd_type: INFO
+#     mailstd_smtpSubject: "[AE353] Agent Commvault/ISM Execution Result"
+#     mailstd_smtpBody: "Bonjour,<br><br>Le ticket {{vIncidentId}} a été créé il y a plus de 15 jours et n'a toujours pas été résolu.<br>Merci d'y remedier.<br><br>Cordialement."
+#   when: vdiff | int > 1202400
+
+- name: set vescalade
+  set_fact:
+    vescalade: "| Mail de relance envoyé"
+  when: vdiff | int > 1202400

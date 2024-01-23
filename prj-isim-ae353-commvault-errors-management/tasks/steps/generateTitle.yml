@@ -1,0 +1,18 @@
+# - name: set Criticality
+#   set_fact:
+#     vCriticality: "[R_Renf]"
+#   when: vApp in vCriticalityList
+
+- name: vMailBody if nothing to do
+  set_fact:
+    vErrorsTypeTitle: "COMMVAULT"
+  when: vErrorsType == "NETWORKER"
+
+- name: set title
+  set_fact:
+    vIncidentTitle: "[{{vCriticality}}] SVG - {{vErrorType}} - {{vErrorsTypeTitle}} - {{vApp}} - {{vHostName}} - {{vFanion}} - [{{vOSI}}] - {{vBackupDate}}"
+
+- name: set search string
+  set_fact:
+    vSearchString: " - {{vErrorsTypeTitle}} - {{vApp}} - {{vHostName}} - {{vFanion}} - [{{vOSI}}] - "
+

@@ -1,0 +1,29 @@
+---
+# Chemin vers le bon interpreteur python
+ansible_python_interpreter: /usr/bin/python
+#var de config
+vFilesRepo: "/tmp/xlrd"
+vScriptRepo: "/tmp/xlrd"
+vCriticalityList: "AEL ECLIDE;OSI DSC|AEPR DEDIE DISTRIBUTEUR;OSI FGAI|AERO;OSI FGAI|APOLO;OSI MAT|ARCHIVAGE & SERVICES;OSI MAT|CLE2003-CLOE;OSI MAT|CLE2003-CLOEOR;OSI MAT|AROM;OSI MMD|CLE2003-PRISME;OSI MAT|ECLIDE;OSI DSC|ECLIDE-DECISIONNEL;OSI DSC|FELIX;OSI MAT|GESMA;OSI MAT|HYPSTER;OSI MAT|ICE;OSI MAT|INFOCENTRE RH;OSI WRH|IVOIRE GESTION D'ACCES;OSI MMD|PCC GENESYS;OSI MAT|PGI;OSI FGAI|PGI INTRANET;OSI FGAI|PLATEFORME DE SERVICES COMMERCE;OSI MAT|PULCO DPD;OSI WRH|PULCO RH;OSI WRH|SIAM;OSI FGAI|SIMM;OSI MMD|SIMM-OAN;OSI MMD|SIMM-OASA;OSI MMD|SITE CP;OSI MMD|SPRINT-SERVEUR PAIE/GA;OSI WRH|VEG@;OSI MAT|VERONE;OSI MMD"
+vEscalationMailAdress: jean-baptiste.meriaux@capgemini.com
+#excel_parsing_server: no2yyw06
+#centreon_server: inctcentp01
+centreon_server: prntcentn01
+pers_server: localhost
+int_nexus_download_url_var: http://prsstn01.noe.edf.fr:10000/repository/automation-ae353/automation-ae353
+
+#init vars techniques
+vMailBody: ""
+vCriticality: "[R_Std]"
+vOsi: "ToModify"
+vFileContent: ""
+vMailBody_new: |
+  The following tickets are going to be opened in Itzmi:
+
+is_new: "'state': u'new'"
+is_in_progress: "'state': u'in_progress'"
+is_on_hold: "'state': u'on_hold'"
+
+#itop
+Itop_Contact_Creation: SG2 COMPTE ADMINISTRATEUR APPLICATIF 8A02519N
+iTopContact: OI2 COMPTE ADMINISTRATEUR APPLICATIF 8A00740N

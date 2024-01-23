@@ -1,0 +1,79 @@
+- name: Gather facts from vserver
+  ansible.builtin.setup:
+  delegate_to: "{{ vHostName }}"
+  delegate_facts: true
+  register: server_facts
+
+- name: set vIncidentId if not defined
+  set_fact:
+    vIncidentId: "{{vNewIncidentId}}"
+  when: vIncidentId is not defined
+
+- name: set vserver_os to linux
+  set_fact:
+    vFileName: SASC_Linux_remediation-Commvault.sh
+  when: server_facts.ansible_facts.ansible_os_family != "Windows"
+
+- name: set vserver_os to Windows
+  set_fact:
+    vFileName: SASC_Windows_remediation-Commvault.ps1
+  when: server_facts.ansible_facts.ansible_os_family == "Windows"
+
+- name: Run script on {{ vHostName }}
+  script:
+    cmd: "files/{{ vFileName }}"
+  register: vScriptResponse
+  delegate_to: "{{ vHostName }}"
+  ignore_errors: yes
+  ignore_unreachable: yes
+
+- name: set serv error vars
+  set_fact:
+    vServerStatus: "KO Le script de remédiation n'a pas corrigé le souci: {{vScriptResponse.msg}}"
+    vServerStatuslog: { "public_log": "Message automatique: Le script de remédiation n'a pas corrigé le souci: {{vScriptResponse.msg}}"}
+  when: vScriptResponse.msg is defined
+  
+- name: set serv error vars
+  set_fact:
+    vServerStatus: "KO Le script de remédiation n'a pas corrigé le souci: {{vScriptResponse.stderr}}"
+    vServerStatuslog: { "public_log": "Message automatique: Le script de remédiation n'a pas corrigé le souci: {{vScriptResponse.stderr}}"}
+  when: vScriptResponse.rc is defined and vScriptResponse.rc != 0
+
+- name: maj original itop Incidet/article server
+  include_role: 
+    name: itop_role
+  vars:
+    operation: core/update
+    class_itop: Incident
+    key: SELECT Incident WHERE id=\"{{ vIncidentId }}\"
+    output_fields: ref
+    comment: Maj COMPTE DE SERVICE INDUS
+    fields: "{{vServerStatuslog}}"
+  when: vScriptResponse.msg is defined or (vScriptResponse.rc is defined and vScriptResponse.rc != 0)
+
+- name: set vServerStatus
+  set_fact:
+    vServerStatus: "KO Technique, impossible de maj le ticket."
+  when: interface_itop_request_response.json.code != 0
+
+- name: maj original itop Incidet/article server
+  include_role: 
+    name: itop_role
+  vars:
+    operation: core/update
+    class_itop: Incident
+    key: SELECT Incident WHERE id=\"{{ vIncidentId }}\"
+    output_fields: ref
+    comment: Maj COMPTE DE SERVICE INDUS
+    fields: { "public_log": "Message automatique: Le script de remédiation a corrigé le souci"}
+  when: vScriptResponse.rc == 0
+
+- name: set vServerStatus
+  set_fact:
+    vServerStatus: "KO Technique, impossible de maj le ticket."
+  when: interface_itop_request_response.json.code != 0
+
+- name: set vserver_os to Windows
+  set_fact:
+    vServerStatus: OK
+  when: vScriptResponse.rc == 0

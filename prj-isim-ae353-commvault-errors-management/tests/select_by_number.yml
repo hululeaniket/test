@@ -1,0 +1,19 @@
+---
+- name: test SNOW
+  hosts: localhost
+  gather_facts: no
+  tasks:
+   - name: Retrieve all incidents that contain SAP in its short description
+     servicenow.itsm.incident_info:
+       instance:
+         client_id: "{{client_id}}"
+         client_secret: "{{client_secret}}"
+         username: "{{username}}"
+         password: "{{password}}"
+         host: "{{host}}"
+         grant_type: password
+       number: INC1640064
+     register: result
+     environment:
+        HTTPS_PROXY: "{{HTTPS_PROXY}}"
+     delegate_to: inctcentp01.pcy.edfgdf.fr

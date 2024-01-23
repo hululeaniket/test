@@ -1,0 +1,35 @@
+---
+- name: test SNOW
+  hosts: localhost
+  gather_facts: no
+  tasks:
+  - name: Create incident
+    servicenow.itsm.incident:
+      instance:
+        client_id: "{{client_id}}"
+        client_secret: "{{client_secret}}"
+        username: "{{username}}"
+        password: "{{password}}"
+        host: "{{host}}"
+        grant_type: password
+      state: new
+      caller: ct_centreon_api
+      other:
+        requester: ct_centreon_api
+        category: Supervision_alert
+      short_description: "[R_Std] - SVG - WN - NETWORKER - BAS5 - NO2YYW06 - AAA01 - [OSC] - 24/08/2021"
+      description: Automated creation by Indus Team
+      impact: medium
+      urgency: medium
+    register: interface_itop_request_response
+    #failed_when: interface_itop_request_response.json is not defined or interface_itop_request_response.json.code != 0
+    environment:
+      HTTPS_PROXY: "{{HTTPS_PROXY}}"
+    delegate_to: inctcentp01.pcy.edfgdf.fr
+
+  - debug:
+      msg: "{{interface_itop_request_response.record.number}}"
+
+  # - name: Get ID if exists after creation
+  #   set_fact:
+  #     vIncidentId: "{{ ((interface_itop_request_response.json.objects | string).split('key',1)[1].split('}',1)[0])[5:-1]}}"

@@ -1,0 +1,34 @@
+---
+- name: test SNOW
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Retrieve all incidents that contain SAP in its short description
+      servicenow.itsm.incident_info:
+        instance:
+          client_id: "{{client_id}}"
+          client_secret: "{{client_secret}}"
+          username: "{{username}}"
+          password: "{{password}}"
+          host: "{{host}}"
+          timeout: 20
+          grant_type: password
+        query :
+        - short_description: LIKE Incident TEST from Ansible REC
+      register: result
+      environment:
+        HTTPS_PROXY: "{{HTTPS_PROXY}}"
+      delegate_to: inctcentp01.pcy.edfgdf.fr
+
+    - name: set fact research string
+      set_fact:
+        is_new: "'state': u'new'"
+        is_in_progress: "'state': u'in progress'"
+
+    - name: check if not exist
+      debug:
+        msg: "there is one!"
+      when: (not (result.records | string) is search(is_new) or (result.records | string) is search(is_in_progress))
+
+        
+      #when: result.records | length == 0

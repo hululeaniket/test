@@ -1,0 +1,22 @@
+#- name: Complete title with date
+#  set_fact:
+#    vItopTitle: "{{vItopTitle}} - {{ lookup('pipe','date +%d/%m/%Y') }}"
+
+- name: Call itop role to Create ticket
+  include_role: 
+    name: itop_role
+  vars:
+    operation: create
+
+- name: set vIncidentId
+  set_fact:
+    vIncidentId: "{{interface_itop_request_response.record.u_number}}"
+  when: interface_itop_request_response.record.u_number is defined
+
+- name: set Ko technique
+  set_fact:
+    vIncidentId: Ko technique
+  when: interface_itop_request_response.record.u_number is undefined
+
+
+

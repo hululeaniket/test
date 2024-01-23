@@ -1,0 +1,59 @@
+- name: set erros param
+  set_fact:
+    vApp: "{{ vErrorDetail.split(';')[0] }}"
+    vFanion: "{{ vErrorDetail.split(';')[1] }}"
+    vHostName: "{{ vErrorDetail.split(';')[2] }}"
+    vErrorType: "{{ vErrorDetail.split(';')[3] }}"
+    vBackupDate: "{{ vErrorDetail.split(';')[4] }}"
+    vOSI: "{{ vErrorDetail.split(';')[5] }}"
+    vCriticality: "{{ vErrorDetail.split(';')[6] }}"
+    #vServerStatus KO is normal
+    vServerStatus: "KO"
+    vIncidentId: empty
+
+# - name: set vFileContent
+#   set_fact:
+#     vFileContent: |
+#       {{ vFileContent }}{{ lookup('pipe','date +%d/%m/%Y') }};{{ lookup('pipe','date +%H:%M:%S') }};{{ vHostName }};{{ vItopTitle }} - {{ lookup('pipe','date +%d/%m/%Y') }}
+
+- name: generate itop title
+  include_tasks: steps/generateTitle.yml
+
+- name: Prepare search string
+  set_fact:
+    vItopTitle: "{{vSearchString}}"  
+
+- name: Check if ticket exists
+  include_role: 
+    name: itop_role
+  vars:
+    operation: check
+  when: vServerStatus == "KO"
+
+- name: set Snow response
+  set_fact:
+    snow_response: "{{interface_itop_request_response.records | default('empty')}}"  
+
+- name: Get ID if exists
+  set_fact:
+    vIncidentId: "{{ snow_response | selectattr('state', 'regex', 'new|in_progress|on_hold') | list }}"
+    
+- name: Get ID if exists
+  set_fact:
+    vIncidentId: "{{ (vIncidentId | first).number }}"
+  when: vIncidentId is defined and (vIncidentId | length > 0)
+
+- name: Set ticket title
+  set_fact:
+    vItopTitle: "{{vIncidentTitle}}"
+  when: vIncidentId is defined and (vIncidentId | length == 0)
+
+- name: Create new Incident
+  include_tasks: steps/createIncident.yml
+  when: vIncidentId is defined and (vIncidentId | length == 0)
+
+- name: update vMailBody
+  set_fact:
+    vMailBody: "{{ vMailBody }}{{ vHostName }} | {{vErrorType}} | {{ vIncidentId | default('null') }} | {{vServerStatus}} {{vescalade | default('')}} <br>"
+    # vMailBody_new: |
+    #   {{ vMailBody_new }}{{ vItopTitle }} - {{ lookup('pipe','date +%d/%m/%Y') }}

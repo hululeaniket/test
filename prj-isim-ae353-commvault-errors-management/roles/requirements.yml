@@ -1,0 +1,14 @@
+# from GitHub
+- src: https://prsstn01.noe.edf.fr:443/Automation/prj-isim-interface-itop.git
+  scm: git
+  version: master
+  name: itop_role
+
+- src: https://prsstn01.noe.edf.fr:443/Automation/PRJ-ISIM-INTERFACE-Nexus_Repository_Manager.git
+  scm: git
+  name: interface_nexus
+
+- src: https://prsstn01.noe.edf.fr:443/Automation/rol-capg-mailstd.git
+  scm: git
+  version: master
+  name: rol-capg-mailstd

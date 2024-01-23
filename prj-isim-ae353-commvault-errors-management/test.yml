@@ -1,0 +1,29 @@
+---
+- name: test SNOW
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Retrieve all incidents that contain SAP in its short description
+      servicenow.itsm.incident_info:
+        instance:
+          client_id: "{{client_id}}"
+          client_secret: "{{client_secret}}"
+          username: "{{username}}"
+          password: "{{password}}"
+          host: "{{host}}"
+          timeout: 20
+          grant_type: password
+        query :
+        - short_description: LIKE [R_Std] - SVG - WN - NETWORKER - ARCHIVAGE ET SERVICES - no2yyw06 - EDTBC
+      register: result
+      environment:
+        HTTPS_PROXY: "{{HTTPS_PROXY}}"
+      delegate_to: inctcentp01.pcy.edfgdf.fr
+
+    - name: check if not exist
+      debug:
+        msg: "there is one!"
+      when: (not (result.records | string) is search(is_new) or (result.records | string) is search(is_in_progress))
+
+        
+      #when: result.records | length == 0

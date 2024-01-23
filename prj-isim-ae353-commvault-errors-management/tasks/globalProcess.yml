@@ -1,0 +1,102 @@
+- name: init vMailBody
+  set_fact:
+    vMailBody: "{{ vMailBody }}<b>{{ vErrorsType}}:</b>  <br>"
+    vFileExists: true
+
+- name: Handle the error
+  block:
+    - name: Download package
+      include_role:
+        name: interface_nexus
+        tasks_from: download_package
+      vars:
+        int_nexus_download_url:  "{{ int_nexus_download_url_var }}/{{vTargetFile}}"
+        int_nexus_download_destination: "{{ vFilesRepo }}"
+
+  rescue:
+    - name: set vErrorFile
+      set_fact:
+        vFileExists: false
+        vMailBody: "{{ vMailBody }}The Excel File does not exist. <br>"
+  become: yes
+  become_method: sudo
+
+- name: Get PERS list
+  find:
+    paths: "/tmp/xlrd/test"
+  register: found_files
+  delegate_to: "{{pers_server}}"
+
+- name: Get latest PERS
+  set_fact:
+    latest_file: "{{ (found_files.files | sort(attribute='mtime') | last).path | basename }}"
+
+# - name: Copy PERS to server
+#   synchronize:
+#     src: /opt/etl/python/pers-extraction-csv/archives/{{ latest_file }}
+#     dest: /tmp/xlrd/{{ latest_file }}
+#   delegate_to: "{{pers_server}}"
+
+- name: Unarchive PERS
+  unarchive:
+    src: /tmp/xlrd/test/{{ latest_file }}
+    dest: /tmp/xlrd/
+    list_files: yes
+    remote_src: true
+  register: unarchived_list
+
+- name: Get PERS csv
+  set_fact:
+    pers_file: "{{ unarchived_list.files[0] }}"
+
+- name: set excel file path
+  set_fact:
+    vFilePath: "{{ vFilesRepo }}/{{ vTargetFile }}"
+
+- name: Copy parseExcel.py to excel_parsing_server
+  ansible.builtin.copy:
+    src: files/parseExcel.py
+    dest: "{{vScriptRepo}}"
+  register: vScriptResponse
+  #delegate_to: "{{excel_parsing_server}}"
+  ignore_errors: yes
+  ignore_unreachable: yes
+  #when: vFileExists
+  become: yes
+  become_method: sudo
+
+- name: Get errors from the file {{ vTargetFile }}
+  #command: "python3 files/parseExcel.py {{ vFilePath }} {{ vErrorsType }}"
+  command: "/usr/bin/python3 {{vScriptRepo}}/parseExcel.py {{ vFilePath }} {{ vErrorsType }} /tmp/xlrd/{{pers_file}}"
+  register: vScriptResponse
+  #delegate_to: "{{excel_parsing_server}}"
+  ignore_errors: yes
+  ignore_unreachable: yes
+  #when: vFileExists
+  become: yes
+  become_method: sudo
+
+- name: set serv error in vMailBody
+  set_fact:
+    vMailBody: "{{ vMailBody }}{{ vScriptResponse.stdout }}  <br>"
+  when: (vScriptResponse.rc is defined and vScriptResponse.rc != 0 ) and vFileExists
+
+- name: set internal error in vMailBody
+  set_fact:
+    vMailBody: "{{ vMailBody }}An internal error occured, please raise MCO. <br>"
+  when: ( vScriptResponse.rc is not defined ) and vFileExists
+
+- name: Loop on each error
+  include_tasks: "tasks/serverProcess.yml"
+  loop: "{{ vScriptResponse.stdout.split('\n') }}"
+  loop_control:
+    loop_var: vErrorDetail
+  when: ( vScriptResponse.rc is defined and vScriptResponse.rc == 0 and vScriptResponse.stdout != ""  ) and vFileExists
+
+# #provisoire
+# - name: set internal error in vMailBody
+#   set_fact:
+#     vErrorDetail: "2PI10;1GA;NO2YYW06;WN"
+
+# - name: Loop on each error
+#   include_tasks: "tasks/serverProcess.yml"
