@@ -1,8 +1,6 @@
----
-- hosts: all
-  become: yes
-  gather_facts: no
-  tasks: 
-   - name: test playbook
-     debug:
-       msg: "test playbook"
+- name: Hello World Sample
+  hosts: all
+  tasks:
+    - name: Hello Message
+      debug:
+        msg: "Hello World!"
